@@ -16,7 +16,7 @@ var db = require('monk')(config.database);
  
 var routes = require('./routes/index');
 var posts = require('./routes/posts');
-//var categories = require('./routes/categories');
+var categories = require('./routes/categories');
 
 var app = express();
 
@@ -84,7 +84,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use(posts);
-//app.use(categories);
+app.use(categories);
 
 
 // catch 404 and forward to error handler
