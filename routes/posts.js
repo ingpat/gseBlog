@@ -23,6 +23,18 @@ router.post('/addPost', function (req, res, next) {
 	var author = req.body.author;
 	var date = new Date();
 
+	if(req.files.mainimage){
+		var mainImageOriginalName = req.files.mainimage.originalname;
+		var mainImageName = req.files.mainimage.name;
+		var mainImageMime = req.files.mainimage.mimetype;
+		var mainImagePath = req.files.mainimage.path;
+		var mainImageExt = req.files.mainimage.extension;
+		var mainImageSize = req.files.mainimage.size;
+	} else {
+		var mainImageName = 'noimage.png';
+	}
+
+
 	req.checkBody('title', 'title field is required').notEmpty();
 	req.checkBody('body', 'body field is required').notEmpty();
 
@@ -41,7 +53,9 @@ router.post('/addPost', function (req, res, next) {
 			'category': category,
 			'body': body,
 			'author': author,
-			'date': date
+			'date': date,
+			"mainimage": mainImageName
+
 		}, function (err, post) {
 			if (err) res.send('there an error in submitting');
 
@@ -54,7 +68,7 @@ router.post('/addPost', function (req, res, next) {
 
 router.post('/addComment', function(req, res, next){
 	//get form values
-	var name = req.body.name;
+	var name = req.body.name; 
 	var email = req.body.email;
 	var body = req.body.body;
 	var postid = req.body.postid;
@@ -72,7 +86,7 @@ router.post('/addComment', function(req, res, next){
 	if(errors){
 		var posts = db.get('posts');
 		posts.findById(postid, function(err, post){
-			res.render('show',{
+			res.render('showpost',{
 				"errors": errors,
 				"post":post
 			});

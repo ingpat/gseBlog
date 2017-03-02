@@ -20,10 +20,6 @@ var categories = require('./routes/categories');
 
 var app = express();
 
-app.locals.truncateText = function(text, length){
-    var truncated = text.substring(0,length);
-        return truncated + " ...";
-}
 
 app.locals.moment = require('moment');
 app.locals.truncateText = function(text,length){
@@ -36,8 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //Handle file uploads
-//app.use(multer({ dest: './public/images/uploads'}).single('mainimage'));
-
+app.use(multer({ dest: './public/images/uploads'}).single('mainimage'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

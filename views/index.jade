@@ -8,6 +8,7 @@ block content
               = post.title
         p.meta Posted in 
            a(href='/showCategory/#{post.category}') #{post.category} by #{post.author} on #{moment(post.date).format('MM-DD-YYYY')}
+        
         !=truncateText(post.body,400)
         a.more(href='/showPost/#{post._id}') Read More
   else

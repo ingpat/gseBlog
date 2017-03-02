@@ -16,13 +16,13 @@ router.get('/showCategory', function(req, res, next){
 	});
 });
 
-router.get('/add', function(req, res, next) {
+router.get('/addCategory', function(req, res, next) {
 	res.render('addcategory',{
 		"title":"Add Category"
 	});
 });
 
-router.post('/add', function(req, res, next){
+router.post('/addCategory', function(req, res, next){
 	//get form values
 	var title = req.body.title;
 
